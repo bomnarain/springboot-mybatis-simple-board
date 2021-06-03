@@ -15,7 +15,11 @@ delete의 경우는 삭제한 행의 개수를 반환
 			B.CONTENTS,
 			B.REG_DATE,
 			B.LOG_DATE
-		FROM T_BOARD B
+		FROM T_BOARD B 
+		WHERE 1=1
+		<if test="@org.apache.commons.lang3.StringUtils@isNotEmpty(keyword)">
+		AND B.TITLE LIKE CONCAT('%', #{keyword}, '%')
+		</if>
 		ORDER BY B.REG_DATE DESC
 	</select>
 	

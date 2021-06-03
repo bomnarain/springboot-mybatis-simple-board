@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.ggoom.sample.domain.Board;
+import kr.co.ggoom.sample.parameter.BoardSearchParameter;
 import kr.co.ggoom.sample.repository.BoardRepository;
 
 @Service
@@ -14,8 +15,8 @@ public class BoardService {
 	@Autowired(required=true)
 	private BoardRepository boardRepository;
 	
-	public List<Board> getList() throws Exception{
-		return boardRepository.getList();
+	public List<Board> getList(BoardSearchParameter parameter) throws Exception{
+		return boardRepository.getList(parameter);
 	}
 	
 	public Board get(int boardSeq) throws Exception {

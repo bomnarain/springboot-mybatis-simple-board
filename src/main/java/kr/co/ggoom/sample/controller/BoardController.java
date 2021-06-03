@@ -30,6 +30,7 @@ import kr.co.ggoom.sample.configuration.http.BaseResponse;
 import kr.co.ggoom.sample.configuration.http.BaseResponseCode;
 import kr.co.ggoom.sample.configuration.http.ErrorResponse;
 import kr.co.ggoom.sample.domain.Board;
+import kr.co.ggoom.sample.parameter.BoardSearchParameter;
 import kr.co.ggoom.sample.service.BoardService;
 
 
@@ -60,9 +61,9 @@ public class BoardController {
 							content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 					})	
 	@GetMapping("/list")
-	public BaseResponse<List<Board>> getList() throws Exception {
+	public BaseResponse<List<Board>> getList(@Parameter BoardSearchParameter parameter) throws Exception {
 		logger.info("getList");
-		return new BaseResponse<List<Board>>(boardService.getList());
+		return new BaseResponse<List<Board>>(boardService.getList(parameter));
 	}
 	
 	// CRUD : Read
