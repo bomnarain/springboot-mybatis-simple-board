@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -89,7 +90,7 @@ public class BoardController {
 		@Parameter(name="boardSeq", description ="게시물번호", example = "1")
 	})
 	@PostMapping("/save")
-	public BaseResponse<Integer> save(Board parameter) throws Exception {
+	public BaseResponse<Integer> save(@RequestBody Board parameter) throws Exception {
 		// 제목 필수
 		if (StringUtils.isEmpty(parameter.getTitle())) {
 			throw new BaseException(BaseResponseCode.VALIDATE_REQUIRED, new String[] {"title","제목"});

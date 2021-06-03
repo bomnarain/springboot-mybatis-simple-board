@@ -8,7 +8,11 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+
 import kr.co.ggoom.sample.configuration.servlet.handler.BaseHandlerIntercepter;
+import kr.co.ggoom.sample.domain.BaseCodeLabelEnum;
 
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
@@ -34,4 +38,13 @@ public class WebConfiguration implements WebMvcConfigurer {
 		registry.addInterceptor(baseHandlerIntercepter());
 	}
 	
+	@Bean
+	public ObjectMapper objectMapper() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		SimpleModule simpleModule = new SimpleModule();
+		simpleModule.addSerializer(BaseCodeLabelEnum.class, new BaseCodeLabelEnumJsonSerializer());
+		objectMapper.registerModule(simpleModule);
+		return objectMapper;		
+	}
+
 }

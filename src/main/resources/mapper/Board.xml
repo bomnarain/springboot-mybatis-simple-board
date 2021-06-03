@@ -10,6 +10,7 @@ delete의 경우는 삭제한 행의 개수를 반환
 	<select id="getList" parameterType="kr.co.ggoom.sample.domain.Board" resultType="kr.co.ggoom.sample.domain.Board">
 		SELECT 
 			B.BOARD_SEQ,
+			B.BOARD_TYPE,
 			B.TITLE,
 			B.CONTENTS,
 			B.REG_DATE,
@@ -21,6 +22,7 @@ delete의 경우는 삭제한 행의 개수를 반환
 	<select id="get" parameterType="int" resultType="kr.co.ggoom.sample.domain.Board">
 		SELECT 
 			B.BOARD_SEQ,
+			B.BOARD_TYPE,
 			B.TITLE,
 			B.CONTENTS,
 			B.REG_DATE,
@@ -31,13 +33,14 @@ delete의 경우는 삭제한 행의 개수를 반환
 	
 	<insert id="save" parameterType="kr.co.ggoom.sample.domain.Board" useGeneratedKeys="true" keyProperty="boardSeq" keyColumn="boardSeq">
 		INSERT INTO T_BOARD 
-		(TITLE, CONTENTS, REG_DATE, LOG_DATE)
+		(BOARD_TYPE, TITLE, CONTENTS, REG_DATE, LOG_DATE)
 		VALUES
-		(#{title}, #{contents}, NOW(), NOW())
+		(#{boardType}, #{title}, #{contents}, NOW(), NOW())
 	</insert>
 	
 	<update id="update" parameterType="kr.co.ggoom.sample.domain.Board">
-		UPDATE T_BOARD SET   
+		UPDATE T_BOARD SET
+			BOARD_TYPE = #{boardType},   
 			TITLE = #{title},
 			CONTENTS = #{contents},
 			LOG_DATE = NOW()
